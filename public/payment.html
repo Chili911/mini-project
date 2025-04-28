@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment - Mini Bookstore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="payment-page">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">💳 Complete Your Payment</h1>
+
+        <div id="bookSummary" class="mb-4"></div>
+
+        <form id="paymentForm" class="border p-4 bg-white shadow w-50 mx-auto rounded">
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Cardholder Name" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Card Number" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="MM/YY" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="CVV" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Pay Now</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="buy.html" class="btn btn-outline-secondary">← Back to Cart</a>
+        </div>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem("buyCart")) || [];
+        const summary = document.getElementById("bookSummary");
+
+        if (cart.length === 0) {
+            summary.innerHTML = "<p class='text-muted text-center'>No items in cart.</p>";
+        } else {
+            let total = 0;
+            const list = document.createElement("ul");
+            list.className = "list-group mb-3";
+
+            cart.forEach(book => {
+                const priceNum = parseFloat(book.price?.replace(/[^0-9.]/g, "") || 0);
+                total += priceNum;
+
+                const item = document.createElement("li");
+                item.className = "list-group-item d-flex justify-content-between align-items-center";
+                item.innerHTML = `${book.title} <span>${book.price || "$0.00"}</span>`;
+                list.appendChild(item);
+            });
+
+            const totalDisplay = document.createElement("li");
+            totalDisplay.className = "list-group-item d-flex justify-content-between fw-bold bg-light";
+            totalDisplay.innerHTML = `Total <span>$${total.toFixed(2)}</span>`;
+            list.appendChild(totalDisplay);
+
+            summary.appendChild(list);
+        }
+
+        document.getElementById("paymentForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("✅ Payment Successful!\nThank you for your purchase.");
+            localStorage.removeItem("buyCart");
+            window.location.href = "browse.html";
+        });
+    </script>
+    <script src="timeout.js"></script>
+</body>
+</html>

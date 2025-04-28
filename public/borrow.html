@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Borrow List - Mini Bookstore</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="mb-4 text-center">📚 Your Borrow List</h1>
+        <div id="borrowContainer" class="row row-cols-1 row-cols-md-3 g-4"></div>
+        <div class="text-center mt-4">
+            <a href="browse.html" class="btn btn-outline-primary">← Continue Browsing</a>
+            <a href="borrow-info.html" class="btn btn-success">Proceed to Borrow Form</a>
+        </div>
+    </div>
+
+    <script>
+        let borrowCart = JSON.parse(localStorage.getItem("borrowCart")) || [];
+        const container = document.getElementById("borrowContainer");
+
+        function renderBorrowList() {
+            //clearing the list
+            container.innerHTML = "";
+            if (borrowCart.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No books in your borrow list yet.</p>';
+                return;
+            }
+
+            borrowCart.forEach((book, index) => {
+                // Create a new Bootstrap card for each book
+                const card = document.createElement("div");
+                card.className = "col";
+                  // Fill the card with book info: cover, title, author, and a "Remove" button
+                card.innerHTML = `
+                    <div class="card shadow-sm h-100 text-center">
+                        <img src="${book.cover}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="${book.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${book.title}</h5>
+                            <p class="card-text"><em>${book.author}</em></p>
+                            <button class="btn btn-sm btn-danger" onclick="removeBorrow(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+                 // Add this card inside the container
+                container.appendChild(card);
+            });
+        }
+        // Function to remove a book from borrowCart
+        function removeBorrow(index) {
+            // Remove the book at position `index` from borrowCart
+            borrowCart.splice(index, 1);
+              // Save the updated cart back into localStorage
+            localStorage.setItem("borrowCart", JSON.stringify(borrowCart));
+              // Re-render the updated list on the page
+            renderBorrowList();
+        }
+        // When the page first loads, display the borrow list
+        renderBorrowList();
+    </script>
+    <script src="timeout.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "cover": "https://covers.openlibrary.org/b/id/7222246-M.jpg",
+      "price": "$9.99"
+    },
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "cover": "https://covers.openlibrary.org/b/id/7222161-M.jpg",
+      "price": "$7.50"
+    },
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "cover": "https://covers.openlibrary.org/b/id/9875492-M.jpg",
+      "price": "$8.25"
+    },
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "cover": "https://covers.openlibrary.org/b/id/8091016-M.jpg",
+      "price": "$6.99"
+    },
+    {
+      "title": "Moby-Dick",
+      "author": "Herman Melville",
+      "cover": "https://covers.openlibrary.org/b/id/7222276-M.jpg",
+      "price": "$11.00"
+    },
+    {
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "cover": "https://covers.openlibrary.org/b/id/8107894-M.jpg",
+      "price": "$10.50"
+    }
+  ]

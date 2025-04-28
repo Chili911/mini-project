@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Account - Mini Bookstore</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h1 class="mb-4 text-center">👤 Your Account</h1>
+
+    <!-- Profile Summary -->
+    <section class="mb-5">
+      <h3>Profile Summary</h3>
+      <div class="card p-3">
+        <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+        <button class="btn btn-outline-primary btn-sm" id="editProfileBtn">Edit Profile</button>
+      </div>
+    </section>
+
+    <!-- Borrowing Details -->
+    <section class="mb-5">
+      <h3>Borrowing Details</h3>
+      <div id="currentBorrows" class="mb-3">
+        <h5>Currently Borrowed Books</h5>
+        <ul class="list-group" id="borrowedList">
+          <li class="list-group-item text-muted">Loading...</li>
+        </ul>
+      </div>
+
+      <div id="borrowHistory">
+        <h5>Borrow History</h5>
+        <ul class="list-group" id="historyList">
+          <li class="list-group-item text-muted">Loading...</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Account Settings -->
+    <section class="mb-5">
+      <h3>Account Settings</h3>
+      <button class="btn btn-outline-secondary btn-sm mb-2" id="changePasswordBtn">Change Password</button><br />
+      <button class="btn btn-outline-secondary btn-sm" id="updateContactBtn">Update Contact Info</button>
+    </section>
+
+    <!-- Logout -->
+    <div class="text-center">
+      <button class="btn btn-danger" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    // Simulated user data (replace with real data fetching)
+    const user = {
+      name: "Khadija Sabir",
+      email: "khadija@example.com",
+      currentBorrows: [
+        { title: "Clean Code", dueDate: "2025-05-10" },
+        { title: "The Pragmatic Programmer", dueDate: "2025-05-15" }
+      ],
+      borrowHistory: [
+        "Introduction to Algorithms",
+        "Design Patterns"
+      ]
+    };
+
+    // Populate profile info
+    document.getElementById("userName").textContent = user.name;
+    document.getElementById("userEmail").textContent = user.email;
+
+    // Populate current borrowed books
+    const borrowedList = document.getElementById("borrowedList");
+    borrowedList.innerHTML = "";
+    if (user.currentBorrows.length === 0) {
+      borrowedList.innerHTML = '<li class="list-group-item">No books currently borrowed.</li>';
+    } else {
+      user.currentBorrows.forEach(book => {
+        borrowedList.innerHTML += `<li class="list-group-item">${book.title} - Due: ${book.dueDate}</li>`;
+      });
+    }
+
+    // Populate borrow history
+    const historyList = document.getElementById("historyList");
+    historyList.innerHTML = "";
+    if (user.borrowHistory.length === 0) {
+      historyList.innerHTML = '<li class="list-group-item">No borrowing history.</li>';
+    } else {
+      user.borrowHistory.forEach(title => {
+        historyList.innerHTML += `<li class="list-group-item">${title}</li>`;
+      });
+    }
+
+    // Event handlers for buttons
+    document.getElementById("editProfileBtn").addEventListener("click", () => {
+      alert("Edit profile functionality coming soon!");
+    });
+
+    document.getElementById("changePasswordBtn").addEventListener("click", () => {
+      alert("Change password functionality coming soon!");
+    });
+
+    document.getElementById("updateContactBtn").addEventListener("click", () => {
+      alert("Update contact info functionality coming soon!");
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      alert("Logged out!");
+      // Add real logout code here, e.g. clearing session or redirecting
+      window.location.href = "index.html"; // Redirect to homepage or login
+    });
+  </script>
+</body>
+</html>

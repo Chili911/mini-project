@@ -1,0 +1,53 @@
+body.index-page {
+    background-image: url("images/2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #fff;
+}
+
+body.index-page h1 {
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+}
+
+
+
+body.browse-page {
+    background-image: url("images/1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #fff; 
+}
+
+body.browse-page h1 {
+    color: #fff;
+    text-shadow: 0 0 5px #000;
+}
+
+
+body.payment-page {
+    background-image: url("images/3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #fff;
+}
+
+body.payment-page h1, 
+body.payment-page label, 
+body.payment-page .btn {
+    color: #fff;
+}
+
+body.payment-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
