@@ -1,0 +1,64 @@
+/* General styles */
+ /* Custom Styles */
+
+ /* Overriding the bg-primary class */
+.bg-light {
+    background-color: #93ac94 !important; /* Custom green */
+}
+
+ h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Adding shadow to the title */
+    font-family: 'Poppins', sans-serif; /* Change to a different font */
+    font-weight: 600; /* Optional: To make the title bold */
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    max-width: 300px; /* Set a maximum width for the cards */
+    margin: 0 auto; /* Center the cards horizontally */
+    height: auto; /* Allow height to adjust according to content */
+}
+
+.card:hover {
+    /* transform: translateY(-5px); */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Empty state messages */
+.text-muted {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.row-cols-1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.text-center.mt-3 {
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .row-cols-1 {
+        gap: 1rem;
+    }
+
+    /* Adjust card max-width for smaller screens */
+    .card {
+        max-width: 250px;
+    }
+}

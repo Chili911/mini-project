@@ -69,6 +69,26 @@
             localStorage.removeItem("buyCart");
             window.location.href = "browse.html";
         });
+
+
+// On payment.html
+document.addEventListener("DOMContentLoaded", function() {
+    const buyCart = JSON.parse(localStorage.getItem("checkoutBuyCart")) || [];
+    const borrowCart = JSON.parse(localStorage.getItem("checkoutBorrowCart")) || [];
+
+    if (buyCart.length > 0 || borrowCart.length > 0) {
+        // Display cart details or proceed with payment processing
+        console.log("Proceed with payment for:", buyCart, borrowCart);
+    } else {
+        // Show a message if no cart data was passed
+        alert("No items in the cart.");
+    }
+});
+
+
+
+
+
     </script>
     <script src="timeout.js"></script>
 </body>

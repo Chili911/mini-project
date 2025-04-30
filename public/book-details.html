@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 1em;
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="book-title"></h1>
+    <img id="book-cover" src="" alt="Book Cover" />
+    <p id="book-author"></p>
+    <p id="book-price"></p>
+    <a href="browse.html">← Back to Browse</a>
+  </div>
+
+  <script>
+    // --- Logic for displaying book details ---
+    const book = JSON.parse(localStorage.getItem("selectedBook"));
+
+    if (book) {
+      document.getElementById("book-title").textContent = book.title;
+      document.getElementById("book-cover").src = book.image;
+      document.getElementById("book-author").textContent = `Author: ${book.author}`;
+      document.getElementById("book-price").textContent = `Price: $${book.price}`;
+    } else {
+      document.body.innerHTML = "<h2 style='color: red;'>Book not found!</h2>";
+    }
+  </script>
+</body>
+</html>
