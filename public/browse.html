@@ -3,7 +3,7 @@
 <head>
 
 
-  <!-- Google Analytics will be activated in script.js after consent -->
+
 
         <!-- link to browse.css for styling-->
         <link rel="stylesheet" href="browse.css">
@@ -31,12 +31,12 @@
             </a>
             
             <!-- Search Bar -->
-            <form class="d-flex mx-3 flex-grow-1">
-                <input class="form-control me-2" type="search" placeholder="Search books..." aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
+            <form class="d-flex mx-3 flex-grow-1" onsubmit="event.preventDefault(); searchBook();">
+              <input id="searchInput" class="form-control me-2" type="search" placeholder="Search books..." aria-label="Search">
+              <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             
-            <!-- User Actions -->
+           
 
                  <a href="borrow.html" class="btn btn-outline-light">
                   🛒 
@@ -44,12 +44,11 @@
                   Bought:   <span id="buyCount"   aria-live="polite">0</span>
                 </a>
                 
-                <!-- Empty Cart Warning Message (Initially Hidden) --> 
-                 <div id="emptyCartMessage" class="alert alert-warning d-none" role="alert">
-                  You must add books to the Buy cart before proceeding to checkout.
-                </div>
-                 
-           </div>
+                
+                  <!-- Become a Member button -->
+                <a href="membership.html" class="btn btn-outline-light ms-3">
+                  Become a Member
+              </a>
 
         </div>
 
@@ -57,188 +56,82 @@
 
   </div>
 
-    <!-- ===== 2. HERO BANNER ===== -->
-    <div class="hero-banner bg-primary text-white py-5 mb-4">
-        <div class="container text-center">
-            <h2>Summer Reading Sale!</h2>
-            <p class="lead">Get 30% off selected titles this month</p>
-        </div>
-    </div>
 
-    <div class="container py-3">
+  <div id="bookGrid" class="row row-cols-1 row-cols-md-3 g-4"></div>
+</div>  <!---loading books -->
 
-<!-- ===== 3. AVAILABLE BOOKS ===== -->
-<section class="available-books container">
-  <h2>Available Books</h2>
-  <div class="books-grid">
-
-      <div class="book-card">
-          <img src="https://covers.openlibrary.org/b/id/8231856-M.jpg" alt="Book 1" />
-          <h3>The Great Gatsby</h3>
-          <div class="stars">★★★★☆</div>
-          <div class="btn-group">
-              <!-- Borrow Button -->
-              <button class="btn borrow-btn" onclick="handleBorrow('The Great Gatsby', 'F. Scott Fitzgerald', 'https://covers.openlibrary.org/b/id/8231856-M.jpg')">Borrow</button>
-              <!-- Buy Button -->
-              <button class="btn buy-btn" onclick="handleBuy('The Great Gatsby', 'F. Scott Fitzgerald', 'https://covers.openlibrary.org/b/id/8231856-M.jpg', 10.99)">Buy</button>
-          </div>
-      </div>
-
-      <div class="book-card">
-          <img src="https://covers.openlibrary.org/b/id/8091016-M.jpg" alt="Book 2" />
-          <h3>1984</h3>
-          <div class="stars">★★★☆☆</div>
-          <div class="btn-group">
-              <!-- Borrow Button -->
-              <button class="btn borrow-btn" onclick="handleBorrow('1984', 'George Orwell', 'https://covers.openlibrary.org/b/id/8091016-M.jpg')">Borrow</button>
-              <!-- Buy Button -->
-              <button class="btn buy-btn" onclick="handleBuy('1984', 'George Orwell', 'https://covers.openlibrary.org/b/id/8091016-M.jpg', 9.99)">Buy</button>
-          </div>
-      </div>
-
-      <div class="book-card">
-          <img src="https://covers.openlibrary.org/b/id/8319251-M.jpg" alt="Book 3" />
-          <h3>To Kill a Mockingbird</h3>
-          <div class="stars">★★★★★</div>
-          <div class="btn-group">
-              <!-- Borrow Button -->
-              <button class="btn borrow-btn" onclick="handleBorrow('To Kill a Mockingbird', 'Harper Lee', 'https://covers.openlibrary.org/b/id/8319251-M.jpg')">Borrow</button>
-              <!-- Buy Button -->
-              <button class="btn buy-btn" onclick="handleBuy('To Kill a Mockingbird', 'Harper Lee', 'https://covers.openlibrary.org/b/id/8319251-M.jpg', 10.99)">Buy</button>
-          </div>
-      </div>
-
-      <div class="book-card">
-          <img src="https://covers.openlibrary.org/b/id/8226191-M.jpg" alt="Book 4" />
-          <h3>Pride and Prejudice</h3>
-          <div class="stars">★★★★☆</div>
-          <div class="btn-group">
-              <!-- Borrow Button -->
-              <button class="btn borrow-btn" onclick="handleBorrow('Pride and Prejudice', 'Jane Austen', 'https://covers.openlibrary.org/b/id/8226191-M.jpg')">Borrow</button>
-              <!-- Buy Button -->
-              <button class="btn buy-btn" onclick="handleBuy('Pride and Prejudice', 'Jane Austen', 'https://covers.openlibrary.org/b/id/8226191-M.jpg', 15.99)">Buy</button>
-          </div>
-      </div>
-
-      <div class="book-card">
-          <img src="https://covers.openlibrary.org/b/id/8081460-M.jpg" alt="Book 5" />
-          <h3>The Catcher in the Rye</h3>
-          <div class="stars">★★★☆☆</div>
-          <div class="btn-group">
-              <!-- Borrow Button -->
-              <button class="btn borrow-btn" onclick="handleBorrow('The Catcher in the Rye', 'J.D. Salinger', 'https://covers.openlibrary.org/b/id/8081460-M.jpg')">Borrow</button>
-              <!-- Buy Button -->
-              <button class="btn buy-btn" onclick="handleBuy('The Catcher in the Rye', 'J.D. Salinger', 'https://covers.openlibrary.org/b/id/8081460-M.jpg', 12.99)">Buy</button>
-          </div>
-      </div>
-
-  </div>
-</section>
-
-        <!-- ===== 4. MEMBERSHIP PROMO ===== -->
-        <h3 class="featured-title mb-3"><i class="fas fa-crown me-2"></i>Bestsellers</h3>
-        <h3 class="featured-title mb-3"><i class="fas fa-star me-2"></i>New Releases</h3>
-        <h3 class="featured-title mb-3"><i class="fas fa-tags me-2"></i>Special Deals</h3>
-    </div>
-
-  </div> <!-- End page-content -->
-
-  <!-- ===== FOOTER ===== -->
+  </div> 
+  
   <footer class="bg-dark text-white mt-auto py-4">
-      <div class="container">
-        <div class="row">
-    
-          <!-- Your Library Services -->
-          <div class="col-md-3 mb-3">
-            <h5>Your Library Services</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Order History</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Account Settings</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Address Book</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Membership</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Payments</a></li>
-            </ul>
-          </div>
-    
-          <!-- Quick Help -->
-          <div class="col-md-3 mb-3">
-            <h5>Quick Help</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Customer Service</a></li>
-              <li><a href="#" class="text-white text-decoration-none">FAQs</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Shipping Info</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Returns & Exchanges</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
-            </ul>
-          </div>
-    
-          <!-- Shop by Category -->
-          <div class="col-md-3 mb-3">
-            <h5>Shop by Category</h5>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white text-decoration-none">Books</a></li>
-              <li><a href="#" class="text-white text-decoration-none">eBooks</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Audiobooks</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Movies & Music</a></li>
-              <li><a href="#" class="text-white text-decoration-none">Toys & Games</a></li>
-            </ul>
-          </div>
-    
-          <!-- Stay Connected -->
-          <div class="col-md-3 mb-3">
-            <h5>Stay in the Know</h5>
-            <form id="email-form">
-              <input type="email" id="email" class="form-control mb-2" placeholder="Your email address" required>
-              <input type="text" id="name" class="form-control mb-2" placeholder="Your name" required>
-              <button type="submit" class="btn btn-outline-light w-100">Subscribe</button>
-            </form>
-
-            <div class="mt-3">
-              <h6>Follow Us</h6>
-              <a href="#" class="text-white fs-5 me-2"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="text-white fs-5 me-2"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="text-white fs-5 me-2"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="text-white fs-5"><i class="fab fa-youtube"></i></a>
-            </div>
-          </div>
-    
-        </div>
-    
-        <hr class="border-secondary">
-    
-        <div class="d-flex justify-content-between small">
-          <div>&copy; 2025 Your Library. All rights reserved.</div>
-          <div>
-            <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
-            <a href="#" class="text-white text-decoration-none me-3">Terms of Use</a>
-            <a href="#" class="text-white text-decoration-none">Accessibility</a>
-          </div>
+    <div class="container">
+      <div class="row">
+        <!--  Subscribe Form -->
+        <div class="col-md-4">
+          <form id="subscribe-form" class="border p-3 rounded shadow-sm bg-light text-dark">
+            <h5 class="mb-3">📬 Stay Updated</h5>
+            <input type="text" id="sub-name" class="form-control mb-2" placeholder="Your name" required>
+            <input type="email" id="sub-email" class="form-control mb-2" placeholder="Your email" required>
+            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+            <!-- ✅ Message area for feedback -->
+            <div id="subscribe-msg" class="mt-2 small text-success text-center"></div>
+          </form>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="main.js"></script> 
+  
+  
 
   <script>
-      fetch("/user-session")
-          .then(res => res.json())
-          .then(data => {
-              if (data.name) {
-                  alert(`Hi ${data.name}, we hope you enjoy the book tour!`);
-              }
-          },500);
+    window.addEventListener("DOMContentLoaded", () => {
+      loadBooks(); // ✅ Load books dynamically on page load
+    });
   </script>
 
-<!-- Cookie Consent Banner -->
-<div id="cookie-banner" class="d-none" >
-  <p>We use cookies to improve your experience. Accept cookies?</p>
-  <button id="accept-cookies">Accept</button>
-  <button id="reject-cookies">Reject</button>
-</div>
+<!-- js for subscribe form -->
+<script>
+  document.getElementById("subscribe-form")?.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
+    const name = document.getElementById("sub-name").value.trim(); //getting name 
+    const email = document.getElementById("sub-email").value.trim(); //getting email
+    const messageDiv = document.getElementById("subscribe-msg");
+    
+    // If either name or email is empty, we don't proceed and exit the function.
+    if (!name || !email) return;
 
+    try {
+      // Send a POST request to the server to subscribe the user with their name and email.
+      // The body is sent in JSON format with the name and email values.
+      await fetch("/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }, // Set content type to JSON.
+        body: JSON.stringify({ name, email }) //converting the data type in json string 
+      });
 
+      document.getElementById("subscribe-form").reset(); // If the subscription is successful, reset the form fields.
 
-  <script src="timeout.js"></script>
-  <script src="script.js"></script>
+      if (messageDiv) {
+        messageDiv.textContent = "✔ You’re subscribed!";
+        messageDiv.classList.remove("text-danger");
+        messageDiv.classList.add("text-success");
+
+        // Hide after 5 seconds 
+        setTimeout(() => messageDiv.textContent = "", 5000);
+      }
+
+    } catch (err) {
+      console.error("❌ Subscription error:", err);
+      if (messageDiv) {
+        messageDiv.textContent = "Something went wrong.";
+        messageDiv.classList.add("text-danger");
+      }
+    }
+  });
+</script>
+
 
 </body>
-</html>

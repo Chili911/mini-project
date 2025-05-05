@@ -2,7 +2,7 @@
  /* Custom Styles */
 
  /* Overriding the bg-primary class */
-.bg-light {
+ .bg-light {
     background-color: #93ac94 !important; /* Custom green */
 }
 

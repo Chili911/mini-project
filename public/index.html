@@ -41,13 +41,18 @@ document.getElementById("registerForm")?.addEventListener("submit", function (e)
         headers: { "Content-Type": "application/json" }, // Tell server the data is in JSON format
         body: JSON.stringify(user)  // Convert the user object into JSON string to send
     })
-    .then(res => res.json())   // After server responds, parse the response as JSON
-    .then(data => alert(data.message));  // Show an alert with the success message from server
+    .then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
+    alert(data.message);
+})
+.catch(err => alert(err.message));
+
 });
 
 
     </script>
-    <script src="timeout.js"></script>
+  
 
 </body>
 </html>

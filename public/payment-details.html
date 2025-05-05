@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Selected Offer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e9f5ec;
+      padding: 40px;
+    }
+
+    .container {
+      background: #ffffff;
+      max-width: 420px;
+      margin: auto;
+      padding: 30px 35px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 128, 0, 0.1);
+      border: 2px solid #d4f0d2;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2e7d32;
+    }
+
+    .section {
+      margin-bottom: 22px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #2e7d32;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #388e3c;
+      outline: none;
+      box-shadow: 0 0 5px rgba(56, 142, 60, 0.3);
+    }
+
+    .payment-options label {
+      display: block;
+      margin: 6px 0;
+      font-weight: normal;
+      color: #444;
+    }
+
+    .payment-options input[type="radio"] {
+      accent-color: #388e3c;
+      margin-right: 6px;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #388e3c;
+    }
+
+    .home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #307c34;
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.home-button:hover {
+  background-color: #388e3c;
+}
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h2>Selected Offer Details</h2>
+
+    <div class="section">
+      <label for="amount">Amount:</label>
+      <input type="text" id="amount" placeholder="Enter amount">
+    </div>
+
+    <div class="section">
+      <label>Payment Way:</label>
+      <div class="payment-options">
+        <label><input type="radio" name="payment" value="credit"> Credit Card</label>
+        <label><input type="radio" name="payment" value="bank"> Bank Transfer</label>
+        <label><input type="radio" name="payment" value="cash"> Cash on Delivery</label>
+      </div>
+    </div>
+
+    <button class="button">Submit Offer</button>
+  </div>
+</body>
+</html>
