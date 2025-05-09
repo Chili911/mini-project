@@ -84,73 +84,74 @@ function loadBooks() {
  
 
 // ── 3) Cart action handlers ──
-function handleBuy(title, author, coverUrl, price) {
-    const cart = JSON.parse(localStorage.getItem("buyCart")) || [];
-  
-    // Check if the book is already in the cart
-    if (!cart.find(book => book.title === title)) {
-        cart.push({ title, author, cover: coverUrl, price });
-        localStorage.setItem("buyCart", JSON.stringify(cart));
-    }
-  
-    // Update the cart counts and show confirmation
-    updateCartCounts();
-    showConfirm(`${title} added to your <strong>Buy</strong> cart.`);
+function handleBuy(title, author, cover, price) {
+  const cart = JSON.parse(localStorage.getItem("buyCart")) || [];
+
+  if (!cart.find(book => book.title === title)) {
+    cart.push({ title, author, cover, price });
+    localStorage.setItem("buyCart", JSON.stringify(cart));
+  }
+
+  updateCartCounts();
+  loadBooks(); // ✅ Refresh UI to disable Borrow button for this book
 }
-  
+
+
+
+
 function handleBorrow(title, author, coverUrl) {
-    const cart = JSON.parse(localStorage.getItem("borrowCart")) || [];
-  
-    // Check if the book is already in the cart
-    if (!cart.find(book => book.title === title)) {
-        cart.push({ title, author, cover: coverUrl });
-        localStorage.setItem("borrowCart", JSON.stringify(cart));
-    }
-  
-    // Update the cart counts and show confirmation
-    updateCartCounts();
-    showConfirm(`${title} added to your <strong>Borrow</strong> list.`);
+  const cart = JSON.parse(localStorage.getItem("borrowCart")) || [];
+
+  if (!cart.find(book => book.title === title)) {
+    cart.push({ title, author, cover: coverUrl });
+    localStorage.setItem("borrowCart", JSON.stringify(cart));
+  }
+
+  updateCartCounts();
+  loadBooks(); // ✅ Refresh UI to disable Buy button for this book
 }
 
-// Updates the cart icon counts for both buy and borrow carts
+
+// ── 3.1) Updating Cart Counts ──
 function updateCartCounts() {
-    const borrowCart = JSON.parse(localStorage.getItem("borrowCart")) || [];
-    const buyCart = JSON.parse(localStorage.getItem("buyCart")) || [];
-  
-    // Update the display for cart counts
-    document.getElementById("borrowCount").textContent = borrowCart.length;
-    document.getElementById("buyCount").textContent = buyCart.length;
-  
-    // Optionally, update the cart icon dynamically if you have one
-    document.getElementById("borrowCartIcon").setAttribute("data-count", borrowCart.length);
-    document.getElementById("buyCartIcon").setAttribute("data-count", buyCart.length);
+  const borrowCart = JSON.parse(localStorage.getItem("borrowCart")) || [];
+  const buyCart = JSON.parse(localStorage.getItem("buyCart")) || [];
+
+  document.getElementById("borrowCount").textContent = borrowCart.length;
+  document.getElementById("buyCount").textContent = buyCart.length;
+
+  const borrowIcon = document.getElementById("borrowCartIcon");
+  const buyIcon = document.getElementById("buyCartIcon");
+
+  if (borrowIcon) borrowIcon.setAttribute("data-count", borrowCart.length);
+  if (buyIcon) buyIcon.setAttribute("data-count", buyCart.length);
+
+  //updateCheckoutButton(buyCart, borrowCart); // ✅ pass both carts
 }
 
-// Initialize cart counts to 0 when the page loads or is reset
-document.addEventListener("DOMContentLoaded", function() {
-    resetCartToDefault();  // Reset cart counts to 0 on page load
-});
-
-// Display a confirmation message
-function showConfirm(message) {
-    const confirmDiv = document.createElement('div');
-    confirmDiv.classList.add('confirm');
-    confirmDiv.innerHTML = message;
-    document.body.appendChild(confirmDiv);
-    setTimeout(() => confirmDiv.remove(), 3000);  // Remove the message after 3 seconds
-}
-
-// Reset cart to default (set both buy and borrow counts to 0)
+// ── 3.2) Resetting Cart to Default ──
 function resetCartToDefault() {
-    // Clear the cart data in localStorage
+  // Clear the cart data in localStorage
+  localStorage.setItem("borrowCart", JSON.stringify([]));
+  localStorage.setItem("buyCart", JSON.stringify([]));
+
+  // Update the cart counts to 0
+  updateCartCounts();
+
+  // Render the empty borrow and buy lists
+  renderBorrowList([]);
+  renderBuyList([]);
+}
+
+
+
+window.addEventListener("load", function () {
+  // Check if the page load is due to an actual browser refresh
+  if (performance.navigation.type === 1) {  // 1 = Reload
     localStorage.setItem("borrowCart", JSON.stringify([]));
     localStorage.setItem("buyCart", JSON.stringify([]));
+  }
 
-    // Update the cart counts to 0
-    document.getElementById("borrowCount").textContent = 0;
-    document.getElementById("buyCount").textContent = 0;
-
-    // Update the cart icon counts (if applicable)
-    document.getElementById("borrowCartIcon").setAttribute("data-count", 0);
-    document.getElementById("buyCartIcon").setAttribute("data-count", 0);
-}
+  updateCartCounts();
+  loadBooks();
+});

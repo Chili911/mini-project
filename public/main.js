@@ -55,7 +55,7 @@ function searchBook() {
 
   if (match) {
     localStorage.setItem("selectedBook", JSON.stringify(match));
-    //window.location.href = "book-details.html";
+    window.location.href = "book-details.html";
   } else {
     alert("Book not found!");
 

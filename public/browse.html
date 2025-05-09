@@ -119,19 +119,23 @@
         messageDiv.classList.remove("text-danger");
         messageDiv.classList.add("text-success");
 
-        // Hide after 5 seconds 
-        setTimeout(() => messageDiv.textContent = "", 5000);
-      }
+       // Redirect to the membership page after 2 seconds
+      setTimeout(() => {
+        window.location.href = "membership.html";
+      }, 2000);
 
-    } catch (err) {
-      console.error("❌ Subscription error:", err);
-      if (messageDiv) {
-        messageDiv.textContent = "Something went wrong.";
-        messageDiv.classList.add("text-danger");
-      }
+      // Hide after 5 seconds 
+      setTimeout(() => messageDiv.textContent = "", 5000);
     }
-  });
-</script>
 
+  } catch (err) {
+    console.error("❌ Subscription error:", err);
+    if (messageDiv) {
+      messageDiv.textContent = "Something went wrong.";
+      messageDiv.classList.add("text-danger");
+    }
+  }
+});
+</script>
 
 </body>

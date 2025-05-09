@@ -150,3 +150,12 @@ app.get("/check-timeout", (req, res) => {
 
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+// Check if the user is logged in (session check)
+app.get("/check-session", (req, res) => {
+    if (req.session.userName) {
+      res.json({ userName: req.session.userName });  // User is logged in
+    } else {
+      res.json({ userName: null });  // No session, not logged in
+    }
+  });

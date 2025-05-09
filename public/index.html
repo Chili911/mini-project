@@ -31,25 +31,25 @@
 
 
     <script>
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-document.getElementById("registerForm")?.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const user = Object.fromEntries(formData);
-    fetch("/register", {
-        method: "POST",   //  sending data
-        headers: { "Content-Type": "application/json" }, // Tell server the data is in JSON format
-        body: JSON.stringify(user)  // Convert the user object into JSON string to send
-    })
-    .then(async res => {
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message);
-    alert(data.message);
-})
-.catch(err => alert(err.message));
-
-});
-
+  document.getElementById("browseBtn")?.addEventListener("click", () => {
+    fetch("/check-session")
+      .then(res => res.json())
+      .then(data => {
+        if (!data.userName) {
+          alert("🚫 You must register first to access the books.");
+        } else {
+          window.location.href = "browse.html";
+        }
+      })
+      .catch(() => {
+        alert("⚠ Error checking session. Please try again.");
+      });
+  });
 
     </script>
   
