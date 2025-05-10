@@ -144,14 +144,7 @@ function resetCartToDefault() {
 }
 
 
-
+// ── 3.4) Load Cart Counts on Page Load WITHOUT Clearing Carts ──
 window.addEventListener("load", function () {
-  // Check if the page load is due to an actual browser refresh
-  if (performance.navigation.type === 1) {  // 1 = Reload
-    localStorage.setItem("borrowCart", JSON.stringify([]));
-    localStorage.setItem("buyCart", JSON.stringify([]));
-  }
-
-  updateCartCounts();
-  loadBooks();
+  updateCartCounts(); // ✅ Only update counts — do not reset!
 });
